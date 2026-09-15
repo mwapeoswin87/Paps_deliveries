@@ -1,0 +1,19 @@
+Name: ${name}
+Phone: ${phone}
+Pickup location: ${pickup}
+Delivery location: ${destination}
+Item: ${item}
+Area: ${area}
+Extra instructions: ${message}
+
+Delivery price: K20`;
+
+  const whatsappNumber = "260962509687";
+  const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
+
+  window.open(url, "_blank");
+});
+</script>
+
+</body>
+</html>
