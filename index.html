@@ -1,19 +1,65 @@
-Name: ${name}
-Phone: ${phone}
-Pickup location: ${pickup}
-Delivery location: ${destination}
-Item: ${item}
-Area: ${area}
-Extra instructions: ${message}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paps Deliveries</title>
+</head>
 
-Delivery price: K20`;
+<body>
 
-  const whatsappNumber = "260962509687";
-  const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
+  <h1>Paps Deliveries</h1>
 
-  window.open(url, "_blank");
-});
-</script>
+  <form id="deliveryForm">
+
+    <input id="name" placeholder="Your name" required><br><br>
+
+    <input id="phone" placeholder="Your phone number" required><br><br>
+
+    <input id="pickup" placeholder="Pickup location" required><br><br>
+
+    <input id="destination" placeholder="Delivery location" required><br><br>
+
+    <input id="item" placeholder="Item to deliver" required><br><br>
+
+    <input id="area" placeholder="Area" required><br><br>
+
+    <textarea id="message" placeholder="Extra instructions"></textarea><br><br>
+
+    <button type="submit">ORDER DELIVERY</button>
+
+  </form>
+
+  <script>
+    document.getElementById("deliveryForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const pickup = document.getElementById("pickup").value;
+      const destination = document.getElementById("destination").value;
+      const item = document.getElementById("item").value;
+      const area = document.getElementById("area").value;
+      const message = document.getElementById("message").value;
+
+      const text =
+        "Paps Deliveries Order%0A" +
+        "Name: " + name + "%0A" +
+        "Phone: " + phone + "%0A" +
+        "Pickup location: " + pickup + "%0A" +
+        "Delivery location: " + destination + "%0A" +
+        "Item: " + item + "%0A" +
+        "Area: " + area + "%0A" +
+        "Extra instructions: " + message + "%0A" +
+        "Delivery price: K20";
+
+      const whatsappNumber = "260962509687";
+
+      const url = "https://wa.me/" + whatsappNumber + "?text=" + text;
+
+      window.open(url, "_blank");
+    });
+  </script>
 
 </body>
 </html>
