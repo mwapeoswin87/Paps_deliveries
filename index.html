@@ -1,65 +1,353 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paps Deliveries</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paps Deliveries Company</title>
+<meta name="description" content="Paps Deliveries brings food, groceries, parcels and everyday essentials to your door in Chililabombwe and Lusaka.">
+<style>
+:root {
+  --green: #087443;
+  --dark: #123329;
+  --orange: #ffb13b;
+  --light: #f4f8f5;
+  --white: #ffffff;
+  --muted: #63736b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--dark);
+  background: var(--light);
+  line-height: 1.5;
+}
+header {
+  background: var(--white);
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 12px #102b2010;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: var(--green); color: white;
+  display: grid; place-items: center; font-size: 25px;
+}
+.brand strong { display: block; font-size: 16px; }
+.brand small { color: var(--muted); }
+nav { display: flex; gap: 14px; flex-wrap: wrap; }
+nav a {
+  color: var(--dark); text-decoration: none;
+  font-weight: bold; font-size: 13px;
+}
+.hero {
+  padding: 48px 5%;
+  background: linear-gradient(125deg, #0b5638, #087443);
+  color: white;
+}
+.hero-inner { max-width: 1100px; margin: auto; }
+.tag {
+  display: inline-block; background: #ffffff20;
+  border: 1px solid #ffffff40; border-radius: 30px;
+  padding: 6px 13px; font-size: 13px;
+}
+.hero h1 { font-size: clamp(32px, 7vw, 55px); line-height: 1.1; margin: 20px 0 14px; }
+.hero p { max-width: 560px; color: #e1f2e8; font-size: 17px; }
+.button {
+  display: inline-block; border: 0; border-radius: 10px;
+  padding: 13px 18px; font-weight: bold;
+  text-decoration: none; cursor: pointer; font-size: 15px;
+}
+.primary { background: var(--orange); color: #30200b; }
+.secondary { background: white; color: var(--green); }
+section { padding: 35px 5%; }
+.section-inner { max-width: 1100px; margin: auto; }
+h2 { font-size: 27px; margin: 0 0 8px; }
+.intro { color: var(--muted); margin-top: 0; }
+.service-grid, .category-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px; margin-top: 22px;
+}
+.card {
+  background: white; padding: 19px; border-radius: 15px;
+  border: 1px solid #e3ebe5; box-shadow: 0 4px 14px #183c2810;
+}
+.card .emoji { font-size: 31px; }
+.card h3 { margin: 8px 0 5px; font-size: 17px; }
+.card p { color: var(--muted); font-size: 14px; margin: 0; }
+.price { color: var(--green); font-weight: bold; margin-top: 8px; }
+.order-section { background: #e9f1eb; }
+form {
+  background: white; border-radius: 17px; padding: 20px;
+  max-width: 760px; border: 1px solid #dce7df; margin-top: 22px;
+}
+label { display: block; font-weight: bold; font-size: 14px; margin: 15px 0 6px; }
+input, select, textarea {
+  width: 100%; padding: 13px; border: 1px solid #ccd9d0;
+  border-radius: 9px; background: white; font-size: 16px;
+  color: var(--dark);
+}
+textarea { min-height: 100px; resize: vertical; }
+.note {
+  background: #fff6df; border-radius: 10px; padding: 12px;
+  color: #654b17; font-size: 13px; margin-top: 14px;
+}
+form button { width: 100%; margin-top: 20px; }
+.info-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px; margin-top: 20px;
+}
+.info-box { background: white; padding: 17px; border-radius: 12px; }
+footer {
+  padding: 28px 5%; background: #102c22; color: white;
+  text-align: center; font-size: 14px;
+}
+footer a { color: #ffca71; }
+.whatsapp {
+  position: fixed; right: 17px; bottom: 18px; z-index: 20;
+  background: #168b50; color: white; padding: 13px 16px;
+  border-radius: 35px; font-weight: bold; text-decoration: none;
+  box-shadow: 0 4px 15px #0003;
+}
+@media(min-width:700px) {
+  .service-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .category-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media(max-width:420px) {
+  header { padding: 11px 4%; }
+  nav { gap: 9px; }
+  nav a { font-size: 12px; }
+  .brand strong { font-size: 14px; }
+  .service-grid, .category-grid, .info-grid {
+    grid-template-columns: 1fr;
+  }
+  section { padding: 29px 4%; }
+  .hero { padding: 38px 5%; }
+}
+</style>
 </head>
-
 <body>
 
-  <h1>Paps Deliveries</h1>
+<header>
+  <div class="brand">
+    <div class="logo">🚚</div>
+    <div>
+      <strong>Paps Deliveries</strong>
+      <small>Your delivery, our priority</small>
+    </div>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#order">Order</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <form id="deliveryForm">
+<main>
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="tag">📍 Chililabombwe & Lusaka, Zambia</span>
+    <h1>You order.<br>We collect.<br>We deliver.</h1>
+    <p>
+      Need food, groceries, a parcel or something from your
+      favourite shop? Tell us what you need and let Paps
+      Deliveries handle the trip.
+    </p>
+    <a class="button primary" href="#order">Place a Delivery Request →</a>
+    <a class="button secondary" href="#services">Explore Services</a>
+  </div>
+</section>
 
-    <input id="name" placeholder="Your name" required><br><br>
+<section id="services">
+  <div class="section-inner">
+    <h2>What can we deliver?</h2>
+    <p class="intro">Tell us what you need, even if your favourite shop isn't listed here.</p>
+    <div class="service-grid">
+      <div class="card">
+        <div class="emoji">🍔</div>
+        <h3>Food & Takeaways</h3>
+        <p>Meals and food orders from your preferred outlet.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🛒</div>
+        <h3>Groceries</h3>
+        <p>Household shopping and supermarket items.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📦</div>
+        <h3>Parcels</h3>
+        <p>Local parcel collection and delivery requests.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📚</div>
+        <h3>Stationery</h3>
+        <p>School, office and everyday essentials.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <input id="phone" placeholder="Your phone number" required><br><br>
+<section>
+  <div class="section-inner">
+    <h2>How it works</h2>
+    <div class="category-grid">
+      <div class="card">
+        <div class="emoji">📝</div>
+        <h3>1. Tell us what you need</h3>
+        <p>Complete the request form with your items and delivery address.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">💬</div>
+        <h3>2. Confirm the details</h3>
+        <p>We'll discuss availability, the total cost and delivery arrangements.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🚚</div>
+        <h3>3. Receive your order</h3>
+        <p>Once the arrangements are confirmed, we'll organise your delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <input id="pickup" placeholder="Pickup location" required><br><br>
+<section class="order-section" id="order">
+  <div class="section-inner">
+    <h2>Request a delivery</h2>
+    <p class="intro">Complete the form. WhatsApp will open with your order details ready to send.</p>
 
-    <input id="destination" placeholder="Delivery location" required><br><br>
+    <form id="deliveryForm">
+      <label for="name">Full name *</label>
+      <input id="name" required maxlength="100" placeholder="Enter your full name">
 
-    <input id="item" placeholder="Item to deliver" required><br><br>
+      <label for="phone">Your phone number *</label>
+      <input id="phone" required type="tel" maxlength="20" placeholder="e.g. 0971234567">
 
-    <input id="area" placeholder="Area" required><br><br>
+      <label for="city">Delivery city or area *</label>
+      <select id="city" required>
+        <option value="">Choose your area</option>
+        <option value="Chililabombwe">Chililabombwe</option>
+        <option value="Lusaka">Lusaka</option>
+      </select>
 
-    <textarea id="message" placeholder="Extra instructions"></textarea><br><br>
+      <label for="pickup">Shop or collection point *</label>
+      <input id="pickup" required maxlength="150" placeholder="Shop name or where to collect">
 
-    <button type="submit">ORDER DELIVERY</button>
+      <label for="items">Items or parcel details *</label>
+      <textarea id="items" required maxlength="1500" placeholder="List the items you need, quantities, or parcel details"></textarea>
 
-  </form>
+      <label for="address">Delivery address *</label>
+      <textarea id="address" required maxlength="500" placeholder="Area, street, house number or nearby landmark"></textarea>
 
-  <script>
-    document.getElementById("deliveryForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+      <label for="payment">Preferred payment method *</label>
+      <select id="payment" required>
+        <option value="">Choose payment method</option>
+        <option value="Cash on delivery">Cash on delivery</option>
+        <option value="Mobile money">Mobile money</option>
+      </select>
 
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const pickup = document.getElementById("pickup").value;
-      const destination = document.getElementById("destination").value;
-      const item = document.getElementById("item").value;
-      const area = document.getElementById("area").value;
-      const message = document.getElementById("message").value;
+      <label for="extra">Additional instructions (optional)</label>
+      <textarea id="extra" maxlength="500" placeholder="Anything else we should know?"></textarea>
 
-      const text =
-        "Paps Deliveries Order%0A" +
-        "Name: " + name + "%0A" +
-        "Phone: " + phone + "%0A" +
-        "Pickup location: " + pickup + "%0A" +
-        "Delivery location: " + destination + "%0A" +
-        "Item: " + item + "%0A" +
-        "Area: " + area + "%0A" +
-        "Extra instructions: " + message + "%0A" +
-        "Delivery price: K20";
+      <div class="note">
+        <strong>Delivery charges:</strong><br>
+        Chililabombwe starts at K20, depending on the order.
+        Lusaka charges depend on the delivery distance and order size.
+        We'll confirm the final delivery fee and any item costs with you
+        before proceeding. Please don't pay until the details are confirmed.
+      </div>
 
-      const whatsappNumber = "260962509687";
+      <button class="button primary" type="submit">Send Request on WhatsApp →</button>
+    </form>
+  </div>
+</section>
 
-      const url = "https://wa.me/" + whatsappNumber + "?text=" + text;
+<section id="contact">
+  <div class="section-inner">
+    <h2>Contact Paps Deliveries</h2>
+    <p class="intro">Have a question? Get in touch with us.</p>
+    <div class="info-grid">
+      <div class="info-box">
+        <strong>📞 Phone / WhatsApp</strong>
+        <p>0962509687</p>
+        <p>0771802861</p>
+      </div>
+      <div class="info-box">
+        <strong>📍 Service areas</strong>
+        <p>Chililabombwe and Lusaka</p>
+        <p>Ask us to confirm availability in your area.</p>
+      </div>
+      <div class="info-box">
+        <strong>💵 Payment options</strong>
+        <p>Cash on delivery or mobile money, as agreed.</p>
+      </div>
+      <div class="info-box">
+        <strong>🕒 Delivery arrangements</strong>
+        <p>Contact us to confirm availability and your delivery time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
-      window.open(url, "_blank");
-    });
-  </script>
+<footer>
+  <p><strong>Paps Deliveries Company</strong></p>
+  <p>You order, we collect, we deliver.</p>
+  <p>© <span id="year"></span> Paps Deliveries. All rights reserved.</p>
+</footer>
+
+<a class="whatsapp"
+   href="https://wa.me/260962509687?text=Hello%20Paps%20Deliveries%2C%20I%20need%20a%20delivery."
+   target="_blank" rel="noopener">WhatsApp Us</a>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+document.getElementById("deliveryForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const city = document.getElementById("city").value;
+  const pickup = document.getElementById("pickup").value.trim();
+  const items = document.getElementById("items").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
+  const extra = document.getElementById("extra").value.trim();
+
+  if (!name || !phone || !city || !pickup || !items || !address || !payment) {
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  const fee = city === "Chililabombwe"
+    ? "Starts at K20; final fee depends on the order."
+    : "Depends on distance and order size; please confirm.";
+
+  const message =
+    "NEW DELIVERY REQUEST - PAPS DELIVERIES%0A" +
+    "--------------------------------%0A" +
+    "Name: " + encodeURIComponent(name) + "%0A" +
+    "Customer phone: " + encodeURIComponent(phone) + "%0A" +
+    "Delivery area: " + encodeURIComponent(city) + "%0A" +
+    "Shop / collection point: " + encodeURIComponent(pickup) + "%0A" +
+    "Items / parcel: " + encodeURIComponent(items) + "%0A" +
+    "Delivery address: " + encodeURIComponent(address) + "%0A" +
+    "Preferred payment: " + encodeURIComponent(payment) + "%0A" +
+    "Estimated delivery fee: " + encodeURIComponent(fee) + "%0A" +
+    "Extra instructions: " + encodeURIComponent(extra || "None");
+
+  window.location.href = "https://wa.me/260962509687?text=" + message;
+});
+</script>
 
 </body>
-</html>
+      </html>
