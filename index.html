@@ -133,7 +133,44 @@ footer a { color: #ffca71; }
   .hero { padding: 38px 5%; }
 }
 </style>
-</head>
+<script>
+function updateBusinessStatus() {
+  const now = new Date();
+  const zambiaTime = new Date(
+    now.toLocaleString("en-US", {
+      timeZone: "Africa/Lusaka"
+    })
+  );
+
+  const day = zambiaTime.getDay();
+  const minutes = zambiaTime.getHours() * 60 +
+                  zambiaTime.getMinutes();
+
+  let openingTime, closingTime;
+
+  if (day === 0) {
+    openingTime = 11 * 60 + 30;
+    closingTime = 18 * 60;
+  } else {
+    openingTime = 9 * 60;
+    closingTime = 20 * 60 + 30;
+  }
+
+  const isOpen =
+    minutes >= openingTime && minutes < closingTime;
+
+  const status = document.getElementById("business-status");
+
+  if (status) {
+    status.textContent = isOpen ? "🟢 OPEN NOW" : "🔴 CLOSED NOW";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateBusinessStatus();
+  setInterval(updateBusinessStatus, 60000);
+});
+</script></head>
 <body>
 
 <header>
@@ -141,7 +178,9 @@ footer a { color: #ffca71; }
     <div class="logo">🚚</div>
     <div>
       <strong>Paps Deliveries</strong>
-      <small>Your delivery, our priority</small>
+      <small>Your delivery, our priority</small><div id="business-status" style="font-weight:bold; margin-top:8px;">
+  Checking business hours...
+</div>
     </div>
   </div>
   <nav>
