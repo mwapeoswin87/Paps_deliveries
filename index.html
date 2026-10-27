@@ -309,7 +309,238 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </section>
 
-<section id="contact">
+<!-- PAPS DELIVERIES SHOPPING MARKETPLACE -->
+<section id="marketplace" style="padding:25px 15px;background:#f4f8f5;color:#123329;">
+  <div style="max-width:900px;margin:auto;">
+
+    <h2 style="text-align:center;">🛒 Shop & Order</h2>
+
+    <p style="text-align:center;">
+      Browse products, add items to your cart, and let Paps Deliveries bring them to you.
+    </p>
+
+    <p style="background:#fff3cd;padding:12px;border-radius:8px;">
+      <strong>Sample catalogue:</strong>
+      Prices below are examples for testing, not verified shop prices.
+    </p>
+
+    <h3>Available Products</h3>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;">
+
+      <div style="background:white;padding:15px;border-radius:10px;">
+        <h4>Bread</h4>
+        <p>Shop: Sample Supermarket</p>
+        <p>Sample price: K25</p>
+        <button onclick="addPapsItem('Bread','Sample Supermarket',25)">
+          Add to Cart
+        </button>
+      </div>
+
+      <div style="background:white;padding:15px;border-radius:10px;">
+        <h4>Milk</h4>
+        <p>Shop: Sample Supermarket</p>
+        <p>Sample price: K35</p>
+        <button onclick="addPapsItem('Milk','Sample Supermarket',35)">
+          Add to Cart
+        </button>
+      </div>
+
+      <div style="background:white;padding:15px;border-radius:10px;">
+        <h4>Chicken Meal</h4>
+        <p>Shop: Sample Restaurant</p>
+        <p>Sample price: K85</p>
+        <button onclick="addPapsItem('Chicken Meal','Sample Restaurant',85)">
+          Add to Cart
+        </button>
+      </div>
+
+      <div style="background:white;padding:15px;border-radius:10px;">
+        <h4>Cooking Oil</h4>
+        <p>Shop: Sample Grocery</p>
+        <p>Sample price: K60</p>
+        <button onclick="addPapsItem('Cooking Oil','Sample Grocery',60)">
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:25px;">Your Shopping Cart</h3>
+
+    <div id="paps-cart" style="background:white;padding:15px;border-radius:10px;">
+      <p>Your cart is empty.</p>
+    </div>
+
+    <h3>Delivery Details</h3>
+
+    <label for="paps-city">Delivery location:</label>
+
+    <select id="paps-city" onchange="updatePapsDelivery()"
+      style="width:100%;padding:12px;margin:8px 0 15px;">
+      <option value="">Choose your location</option>
+      <option value="Chililabombwe">Chililabombwe</option>
+      <option value="Lusaka">Lusaka</option>
+    </select>
+
+    <div id="paps-delivery-fee"
+      style="background:white;padding:12px;border-radius:8px;">
+      Choose a location to see the delivery pricing information.
+    </div>
+
+    <p>
+      <label for="paps-address">Delivery address or area:</label>
+      <input id="paps-address" type="text"
+        placeholder="Enter your delivery location"
+        style="box-sizing:border-box;width:100%;padding:12px;margin-top:8px;">
+    </p>
+
+    <p>
+      <label for="paps-notes">Additional instructions (optional):</label>
+      <textarea id="paps-notes"
+        placeholder="Any special requests?"
+        style="box-sizing:border-box;width:100%;padding:12px;margin-top:8px;"></textarea>
+    </p>
+
+    <button onclick="checkoutPapsCart()"
+      style="width:100%;padding:15px;background:#087443;color:white;border:0;border-radius:8px;font-size:16px;">
+      Send Order to WhatsApp
+    </button>
+
+    <p style="font-size:13px;">
+      Final product prices, availability, and delivery fees must be confirmed
+      before the order is accepted.
+    </p>
+
+  </div>
+</section>
+
+<script>
+const papsCart = [];
+
+function addPapsItem(name, shop, price) {
+  const existing = papsCart.find(
+    item => item.name === name && item.shop === shop
+  );
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    papsCart.push({
+      name: name,
+      shop: shop,
+      price: price,
+      quantity: 1
+    });
+  }
+
+  renderPapsCart();
+}
+
+function changePapsQuantity(index, amount) {
+  papsCart[index].quantity += amount;
+
+  if (papsCart[index].quantity <= 0) {
+    papsCart.splice(index, 1);
+  }
+
+  renderPapsCart();
+}
+
+function renderPapsCart() {
+  const cart = document.getElementById("paps-cart");
+
+  if (papsCart.length === 0) {
+    cart.innerHTML = "<p>Your cart is empty.</p>";
+    return;
+  }
+
+  let html = "";
+  let total = 0;
+
+  papsCart.forEach((item, index) => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+
+    html += `
+      <div style="padding:10px 0;border-bottom:1px solid #ddd;">
+        <strong>${item.name}</strong><br>
+        Shop: ${item.shop}<br>
+        Sample price: K${item.price}<br>
+        Quantity: ${item.quantity}<br>
+        Item subtotal: K${subtotal}<br>
+        <button onclick="changePapsQuantity(${index},-1)">−</button>
+        <button onclick="changePapsQuantity(${index},1)">+</button>
+      </div>
+    `;
+  });
+
+  html += `<h3>Sample product subtotal: K${total}</h3>`;
+  html += `<p>Actual prices must be confirmed with the shops.</p>`;
+
+  cart.innerHTML = html;
+}
+
+function updatePapsDelivery() {
+  const city = document.getElementById("paps-city").value;
+  const box = document.getElementById("paps-delivery-fee");
+
+  if (city === "Chililabombwe") {
+    box.textContent =
+      "Delivery starts at K20. The final fee depends on order size and must be confirmed.";
+  } else if (city === "Lusaka") {
+    box.textContent =
+      "The delivery fee will be confirmed based on distance and order size.";
+  } else {
+    box.textContent = "Choose a location to see delivery pricing information.";
+  }
+}
+
+function checkoutPapsCart() {
+  if (papsCart.length === 0) {
+    alert("Please add at least one product to your cart.");
+    return;
+  }
+
+  const city = document.getElementById("paps-city").value;
+  const address = document.getElementById("paps-address").value.trim();
+  const notes = document.getElementById("paps-notes").value.trim();
+
+  if (!city || !address) {
+    alert("Please select your delivery location and enter your address or area.");
+    return;
+  }
+
+  let message = "Hello Paps Deliveries! I want to place an order:\n\n";
+  let total = 0;
+
+  papsCart.forEach(item => {
+    message +=
+      item.shop + " - " + item.name +
+      " x " + item.quantity +
+      " (sample price K" + item.price + " each)\n";
+
+    total += item.price * item.quantity;
+  });
+
+  message += "\nSample product subtotal: K" + total;
+  message += "\nDelivery location: " + city;
+  message += "\nDelivery address/area: " + address;
+  message += "\nDelivery fee: Please confirm.";
+  message += "\nProduct prices and availability: Please confirm.";
+
+  if (notes) {
+    message += "\nAdditional instructions: " + notes;
+  }
+
+  const whatsappURL =
+    "https://wa.me/260771802861?text=" + encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+}
+</script>
+<!-- END PAPS DELIVERIES SHOPPING MARKETPLACE -->
+  <section id="contact">
   <div class="section-inner">
     <h2>Contact Paps Deliveries</h2>
     <p class="intro">Have a question? Get in touch with us.</p>
